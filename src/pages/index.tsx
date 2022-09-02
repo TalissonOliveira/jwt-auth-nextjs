@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
+import { AuthContext } from '../contexts/AuthContext'
 
 import styles from './styles.module.scss'
 
 const Home: NextPage = () => {
+  const { signIn } = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,7 +17,7 @@ const Home: NextPage = () => {
       password
     }
 
-    console.log(data)
+    await signIn(data)
   }
 
   return (
