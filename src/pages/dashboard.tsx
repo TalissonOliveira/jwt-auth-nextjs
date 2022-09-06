@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useContext } from 'react'
+import { Can } from '../components/Can'
 import { AuthContext } from '../contexts/AuthContext'
 import { useCan } from '../hooks/useCan'
 import { setupAPIClient } from '../services/api'
@@ -17,7 +18,15 @@ const Dashboard: NextPage = () => {
     <main>
       <h1>Dashboard</h1>
       <p>{user?.email}</p>
-      { userCanSeeMetrics && <div>Métricas</div>}
+
+      {userCanSeeMetrics && <div>Métricas</div>}
+
+      <Can
+        permissions={['users.list']}
+        roles={['editor']}
+      >
+        <div>Usuários</div>
+      </Can>
     </main>
   )
 }
