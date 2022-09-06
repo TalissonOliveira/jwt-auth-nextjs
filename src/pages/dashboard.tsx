@@ -1,15 +1,23 @@
 import type { NextPage } from 'next'
 import { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
+import { useCan } from '../hooks/useCan'
 import { setupAPIClient } from '../services/api'
 import { withSSRAuth } from '../utils/withSSRAuth'
 
 const Dashboard: NextPage = () => {
   const { user } = useContext(AuthContext)
+
+  const userCanSeeMetrics = useCan({
+    permissions: ['metrics.list'],
+    roles: ['administrator', 'editor']
+  })
+
   return (
     <main>
       <h1>Dashboard</h1>
       <p>{user?.email}</p>
+      { userCanSeeMetrics && <div>Métricas</div>}
     </main>
   )
 }
