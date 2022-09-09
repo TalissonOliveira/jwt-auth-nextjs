@@ -7,7 +7,7 @@ import { setupAPIClient } from '../services/api'
 import { withSSRAuth } from '../utils/withSSRAuth'
 
 const Dashboard: NextPage = () => {
-  const { user } = useContext(AuthContext)
+  const { user, signOut } = useContext(AuthContext)
 
   const userCanSeeMetrics = useCan({
     permissions: ['metrics.list'],
@@ -27,6 +27,8 @@ const Dashboard: NextPage = () => {
       >
         <div>Usuários</div>
       </Can>
+
+      <button onClick={signOut}>Sign Out</button>
     </main>
   )
 }
